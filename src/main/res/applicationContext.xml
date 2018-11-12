@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="user" class="main.java.com.spring.javabean.User">
+        <property name="name" value="luying"/>
+        <property name="age" value="27"/>
+        <property name="height" value="172"/>
+        <property name="gender" value="男"/>
+    </bean>
+
+    <bean name="userInfo" class="main.java.com.spring.javabean.UserInfo">
+        <property name="user" ref="user"/>
+    </bean>
+
+    <bean name="productService" class="main.java.com.spring.service.ProduceService" />
+
+
+</beans>
