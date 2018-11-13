@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <bean name="user" class="main.java.com.spring.javabean.User">
         <property name="name" value="luying"/>
@@ -14,7 +14,48 @@
         <property name="user" ref="user"/>
     </bean>
 
-    <bean name="productService" class="main.java.com.spring.service.ProduceService" />
+    <bean name="productService" class="main.java.com.spring.service.ProduceService"/>
 
+    <bean name="loggerAspect" class="main.java.com.spring.aspect.LoggerAspect"/>
+
+
+    <!--例一、 cjlib 配置AOP -->
+    <aop:config>
+        <!-- where：在哪些地方（包.类.方法）做增加 -->
+        <aop:pointcut id="loggerCutpoint"
+                      expression="execution(* main.java.com.spring.service.ProduceService.*(..)) "/>
+
+        <!-- what:做什么增强 -->
+        <aop:aspect id="logAspect" ref="loggerAspect">
+            <!-- when:在什么时机（方法前/后/前后） -->
+            <aop:around pointcut-ref="loggerCutpoint" method="log"/>
+        </aop:aspect>
+    </aop:config>
+
+
+
+
+    <!--例二、动态代理-->
+    <!--导入aop(约束)命名空间-->
+    <!--配置目标对象-->
+    <bean name="userService" class="main.java.com.spring.service.UserServiceImpl"/>
+
+    <!--配置通知对象-->
+    <bean name="myAdvice" class="main.java.com.spring.MyAdvice"/>
+
+    <aop:config>
+        <!--配置切入点, 匹配所有含有ServiceImpl的类(被代理对象的实现类)-->
+        <aop:pointcut id="pointCut" expression="execution(* main.java.com.spring.service..*ServiceImpl.*(..))"/>
+        <aop:aspect ref="myAdvice">
+            <!-- 指定为before方法作为前置通知 -->
+            <aop:before method="before" pointcut-ref="pointCut"/>
+            <aop:after method="after" pointcut-ref="pointCut"/>
+            <aop:around method="around" pointcut-ref="pointCut"/>
+            <aop:after-throwing method="afterException" pointcut-ref="pointCut"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pointCut"/>
+
+        </aop:aspect>
+
+    </aop:config>
 
 </beans>
