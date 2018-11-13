@@ -32,7 +32,7 @@ public class TestSpring {
         ProduceService produceService = (ProduceService) context.getBean("productService");
         produceService.doSth();
 
-        //jdk自带动态代理方式(需接口)
+        //jdk自带动态代理方式(需接口)  （配置和注解2中方式调用不变）
         UserService userService = (UserService) context.getBean("userService");
         userService.find();
         System.out.println("---------------------------");

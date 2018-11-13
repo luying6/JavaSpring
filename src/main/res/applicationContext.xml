@@ -38,24 +38,38 @@
     <!--例二、动态代理-->
     <!--导入aop(约束)命名空间-->
     <!--配置目标对象-->
+    <!--<bean name="userService" class="main.java.com.spring.service.UserServiceImpl"/>-->
+
+    <!--配置通知对象-->
+    <!--<bean name="myAdvice" class="main.java.com.spring.MyAdvice"/>-->
+
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;配置切入点, 匹配所有含有ServiceImpl的类(被代理对象的实现类)&ndash;&gt;-->
+        <!--<aop:pointcut id="pointCut" expression="execution(* main.java.com.spring.service..*ServiceImpl.*(..))"/>-->
+        <!--<aop:aspect ref="myAdvice">-->
+            <!--&lt;!&ndash; 指定为before方法作为前置通知 &ndash;&gt;-->
+            <!--<aop:before method="before" pointcut-ref="pointCut"/>-->
+            <!--<aop:after method="after" pointcut-ref="pointCut"/>-->
+            <!--<aop:around method="around" pointcut-ref="pointCut"/>-->
+            <!--<aop:after-throwing method="afterException" pointcut-ref="pointCut"/>-->
+            <!--<aop:after-returning method="afterReturning" pointcut-ref="pointCut"/>-->
+
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+
+
+    <!--例三、aop(注解方式)-->
+    <!--导入aop(约束)命名空间-->
+    <!--配置目标对象-->
     <bean name="userService" class="main.java.com.spring.service.UserServiceImpl"/>
 
     <!--配置通知对象-->
     <bean name="myAdvice" class="main.java.com.spring.MyAdvice"/>
 
-    <aop:config>
-        <!--配置切入点, 匹配所有含有ServiceImpl的类(被代理对象的实现类)-->
-        <aop:pointcut id="pointCut" expression="execution(* main.java.com.spring.service..*ServiceImpl.*(..))"/>
-        <aop:aspect ref="myAdvice">
-            <!-- 指定为before方法作为前置通知 -->
-            <aop:before method="before" pointcut-ref="pointCut"/>
-            <aop:after method="after" pointcut-ref="pointCut"/>
-            <aop:around method="around" pointcut-ref="pointCut"/>
-            <aop:after-throwing method="afterException" pointcut-ref="pointCut"/>
-            <aop:after-returning method="afterReturning" pointcut-ref="pointCut"/>
+    <!--注解配置-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
-        </aop:aspect>
-
-    </aop:config>
 
 </beans>
