@@ -4,6 +4,10 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+    <!--参考：https://blog.csdn.net/endlessseaofcrow/article/details/79519493#1%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9-->
+
+
     <bean name="user" class="main.java.com.spring.javabean.User">
         <property name="name" value="luying"/>
         <property name="age" value="27"/>
