@@ -1,7 +1,9 @@
 package main.java.com.spring.test;
 
+import main.java.com.spring.dao.UserDao;
 import main.java.com.spring.javabean.User;
 import main.java.com.spring.javabean.UserInfo;
+import main.java.com.spring.javabean.Users;
 import main.java.com.spring.service.ProduceService;
 import main.java.com.spring.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -38,5 +40,17 @@ public class TestSpring {
         System.out.println("---------------------------");
         userService.save();
 
+
+
+        //数据库测试
+        Users users = new Users();
+        users.setAdminName("ls");
+        users.setPassword("lu111111");
+        users.setAge(20);
+        UserDao userDao = (UserDao) context.getBean("userDao");
+        userDao.save(users);
+        userDao.delete(0);
+        userDao.getAll();
+        System.out.println(userDao.getAll().toString());
     }
 }
